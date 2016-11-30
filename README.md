@@ -7,7 +7,9 @@ TLS(SSL)
 ->Most common cases each client and server must have a private key.
 
 ------------Generation of private key using openSSL------------------------
+
 		openssl genrsa -out srini-key.pem 2048
+
 ----------------------- ---- ----------------------------------------------
 
 ->TLS/SSL all the servers (and some clients) must have certificate .
@@ -18,16 +20,21 @@ TLS(SSL)
 	-> steps for obtaining a certificate is to create a Certificate Signing Request(CSR) file.
 
 ------------Generation of CSR using openSSL--------------------------------
+
      	openssl req -new -sha256 -key srini-key.pem -out srini-csr.pem
+
 ----------------------------- ---------------------------------------------
 
 -> Once CSR is generated it is sent to CA for signing or used to generate a self signed certificate.
 
 ----------------Generating a self signed Certificate using OpenSSL---------------------------------
+
 		openssl x509 -req -in srini-csr.pem -signkey srini-key.pem -out srini-cert.pem
+
 ------------------------------------- -------------------------------------------------------------
 
 ----------------Generating .pfx or .p12 file using openSSL--------------------------------
+
 -> using certificate and the private key you can generate .p12 or .pfx file
 
 		openssl pkcs12 -export -in srini-cert.pem -inkey srini-key.pem \   -certfile ca-cert.pem -out srini.pfx
@@ -61,6 +68,7 @@ TLS(SSL)
 	-> TLS protocol allows clients to renegotiate certain aspects of the TLS session.
 
 	->Session renegotiation requires a disproportionate amount of server-side resources, making it a potential vector for denial-of-service attacks
+
 ----------------------------------------------------- --------------------------------------------------------------------------------------------------------------------
 
 -> TLS using NodeJS 		
